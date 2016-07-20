@@ -52,7 +52,7 @@ public class Codigo {
 
 	private boolean lookupChar(char nextChar) {
 		return nextChar == '>' || nextChar == '<' || nextChar == '=' || nextChar == '[' || nextChar == ']'
-				|| nextChar == ','|| nextChar == '+' || nextChar == '-' || nextChar == '*'|| nextChar == '/';
+				|| nextChar == ',' || nextChar == '+' || nextChar == '-' || nextChar == '*' || nextChar == '/';
 	}
 
 	private Caracter getChar() {
@@ -111,8 +111,10 @@ public class Codigo {
 				if (nextCharAux != null) {
 					nextChar = nextCharAux;
 				}
-			} while (nextCharAux != null && nextChar.getCharClass() == "Digito");
-			linha = nextChar.getNextChar() + linha;
+			} while (nextCharAux != null && nextChar.getCharClass().equals("Digito"));
+			if (nextCharAux != null) {
+				linha = nextChar.getNextChar() + linha;
+			}
 			return lexeme;
 		case "Letra":
 			do {
@@ -123,8 +125,13 @@ public class Codigo {
 				}
 			} while ((nextCharAux != null && nextChar.getCharClass() == "Digito")
 					|| (nextCharAux != null && nextChar.getCharClass() == "Letra"));
-			linha = nextChar.getNextChar() + linha;
+
 			if (lookupString(lexeme)) {
+				if (nextChar.getCharClass().equals("Espaco")) {
+					lexeme = addChar(lexeme, nextChar.getNextChar());
+				} else if (nextCharAux != null) {
+					linha = nextChar.getNextChar() + linha;
+				}
 				return lexeme;
 			}
 			break;
@@ -143,7 +150,7 @@ public class Codigo {
 
 	public static void main(String[] args) {
 		Codigo cod = new Codigo();
-//		cod.insereLinha("SET 10 , D [ 10 ] ");
+		// cod.insereLinha("SET 10 , D [ 10 ] ");
 		cod.insereLinha("set 0, read");
 		cod.insereLinha("set 1, read");
 		cod.insereLinha("jumpt 8, d[0]=d[1]");
@@ -153,18 +160,17 @@ public class Codigo {
 		cod.insereLinha("set 1, d[1] -d[0]");
 		cod.insereLinha("jump 2");
 		cod.insereLinha("set write, d[0]");
-//		cod.insereLinha("jumpt teste");
+		// cod.insereLinha("jumpt teste");
 		// cod.interpretaLinha(0);
-		System.out.println(cod.analiseLexicaAux(0));
-		System.out.println(cod.analiseLexicaAux(1));
-		System.out.println(cod.analiseLexicaAux(2));
-		System.out.println(cod.analiseLexicaAux(3));
-		System.out.println(cod.analiseLexicaAux(4));
-		System.out.println(cod.analiseLexicaAux(5));
-		System.out.println(cod.analiseLexicaAux(6));
-		System.out.println(cod.analiseLexicaAux(7));
-		System.out.println(cod.analiseLexicaAux(8));
-		System.out.println(cod.analiseLexicaAux(9));
+		System.out.println(" : " + cod.analiseLexicaAux(0));
+		System.out.println(" : " + cod.analiseLexicaAux(1));
+		System.out.println(" : " + cod.analiseLexicaAux(2));
+		System.out.println(" : " + cod.analiseLexicaAux(3));
+		System.out.println(" : " + cod.analiseLexicaAux(4));
+		System.out.println(" : " + cod.analiseLexicaAux(5));
+		System.out.println(" : " + cod.analiseLexicaAux(6));
+		System.out.println(" : " + cod.analiseLexicaAux(7));
+		System.out.println(" : " + cod.analiseLexicaAux(8));
 
 		// 9 = dígito
 		// 2 = letra minuscula
