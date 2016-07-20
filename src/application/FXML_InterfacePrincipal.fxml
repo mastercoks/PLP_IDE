@@ -68,26 +68,29 @@
                            <graphic>
                               <ImageView>
                                  <image>
-                                    <Image url="@../icons/novo.png" />
+                                    <Image url="/icons/novo.png" />
                                  </image>
                               </ImageView>
-                           </graphic></Button>
+                           </graphic>
+                        </Button>
                         <Button alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="140.0" text="Carregar Programa">
                            <graphic>
                               <ImageView>
                                  <image>
-                                    <Image url="@../icons/carregar.png" />
+                                    <Image url="/icons/carregar.png" />
                                  </image>
                               </ImageView>
-                           </graphic></Button>
+                           </graphic>
+                        </Button>
                         <Button alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="140.0" text="Salvar Programa">
                            <graphic>
                               <ImageView>
                                  <image>
-                                    <Image url="@../icons/salvar.png" />
+                                    <Image url="/icons/salvar.png" />
                                  </image>
                               </ImageView>
-                           </graphic></Button>
+                           </graphic>
+                        </Button>
                         <Label text="Arquivo" />
                      </children>
                   </VBox>
@@ -102,26 +105,29 @@
                                        <graphic>
                                           <ImageView>
                                              <image>
-                                                <Image url="@../icons/comecar.png" />
+                                                <Image url="/icons/comecar.png" />
                                              </image>
                                           </ImageView>
-                                       </graphic></Button>
+                                       </graphic>
+                                    </Button>
                                     <Button alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Pausar">
                                        <graphic>
                                           <ImageView>
                                              <image>
-                                                <Image url="@../icons/pausar.png" />
+                                                <Image url="/icons/pausar.png" />
                                              </image>
                                           </ImageView>
-                                       </graphic></Button>
+                                       </graphic>
+                                    </Button>
                                     <Button alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Parar">
                                        <graphic>
                                           <ImageView>
                                              <image>
-                                                <Image url="@../icons/parar.png" />
+                                                <Image url="/icons/parar.png" />
                                              </image>
                                           </ImageView>
-                                       </graphic></Button>
+                                       </graphic>
+                                    </Button>
                                  </children>
                               </VBox>
                               <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0">
@@ -130,26 +136,29 @@
                                        <graphic>
                                           <ImageView>
                                              <image>
-                                                <Image url="@../icons/passar.png" />
+                                                <Image url="/icons/passar.png" />
                                              </image>
                                           </ImageView>
-                                       </graphic></Button>
+                                       </graphic>
+                                    </Button>
                                     <Button alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Continuar">
                                        <graphic>
                                           <ImageView>
                                              <image>
-                                                <Image url="@../icons/continuar.png" />
+                                                <Image url="/icons/continuar.png" />
                                              </image>
                                           </ImageView>
-                                       </graphic></Button>
+                                       </graphic>
+                                    </Button>
                                     <Button alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Recomeçar">
                                        <graphic>
                                           <ImageView>
                                              <image>
-                                                <Image url="@../icons/recomecar.png" />
+                                                <Image url="/icons/recomecar.png" />
                                              </image>
                                           </ImageView>
-                                       </graphic></Button>
+                                       </graphic>
+                                    </Button>
                                  </children>
                               </VBox>
                            </children>
@@ -164,56 +173,62 @@
                            <graphic>
                               <ImageView>
                                  <image>
-                                    <Image url="@../icons/set.png" />
+                                    <Image url="/icons/set.png" />
                                  </image>
                               </ImageView>
-                           </graphic></Button>
+                           </graphic>
+                        </Button>
                         <Button alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="115.0" text="Deletar">
                            <graphic>
                               <ImageView>
                                  <image>
-                                    <Image url="@../icons/deletar.png" />
+                                    <Image url="/icons/deletar.png" />
                                  </image>
                               </ImageView>
-                           </graphic></Button>
+                           </graphic>
+                        </Button>
                         <Button alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="115.0" text="Deletar Todos">
                            <graphic>
                               <ImageView>
                                  <image>
-                                    <Image url="@../icons/deletarTudo.png" />
+                                    <Image url="/icons/deletarTudo.png" />
                                  </image>
                               </ImageView>
-                           </graphic></Button>
+                           </graphic>
+                        </Button>
                         <Label text="Breakpoint" />
                      </children>
                   </VBox>
                   <Separator orientation="VERTICAL" prefHeight="200.0" />
                   <VBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="145.0" spacing="5.0">
                      <children>
-                        <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#actionButton" prefHeight="25.0" prefWidth="115.0" text="Set">
+                        <Button alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="115.0" text="Set">
                            <graphic>
                               <ImageView>
                                  <image>
-                                    <Image url="@../icons/set.png" />
+                                    <Image url="/icons/set.png" />
                                  </image>
                               </ImageView>
-                           </graphic></Button>
+                           </graphic>
+                        </Button>
                         <Button alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="115.0" text="Deletar">
                            <graphic>
                               <ImageView>
                                  <image>
-                                    <Image url="@../icons/deletar.png" />
+                                    <Image url="/icons/deletar.png" />
                                  </image>
                               </ImageView>
-                           </graphic></Button>
+                           </graphic>
+                        </Button>
                         <Button alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="115.0" text="Deletar Todos">
                            <graphic>
                               <ImageView>
                                  <image>
-                                    <Image url="@../icons/deletarTudo.png" />
+                                    <Image url="/icons/deletarTudo.png" />
                                  </image>
                               </ImageView>
-                           </graphic></Button>
+                           </graphic>
+                        </Button>
                         <Label text="Dados Breakpoint" />
                      </children>
                   </VBox>
@@ -228,7 +243,7 @@
                <children>
                   <HBox>
                      <children>
-                        <ListView fx:id="simplesemCode" maxWidth="1.7976931348623157E308" prefHeight="434.0" prefWidth="36.0" />
+                        <ListView fx:id="simplesemCode" maxWidth="1.7976931348623157E308" prefHeight="434.0" prefWidth="40.0" />
                         <TableView editable="true">
                           <columns>
                             <TableColumn prefWidth="75.0" sortable="false" text="Código" />
@@ -279,7 +294,7 @@
                <children>
                   <HBox>
                      <children>
-                        <ListView fx:id="saida" cacheShape="false" centerShape="false" disable="true" focusTraversable="false" prefHeight="434.0" prefWidth="40.0" scaleShape="false" />
+                        <ListView fx:id="saida" editable="true" prefHeight="434.0" prefWidth="40.0" />
                         <TableView editable="true" prefWidth="100.0">
                            <columns>
                               <TableColumn prefWidth="75.0" sortable="false" text="Saída" />
