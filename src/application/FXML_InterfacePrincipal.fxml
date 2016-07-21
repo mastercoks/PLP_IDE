@@ -4,313 +4,181 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="600.0" prefWidth="730.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FXML_InterfacePrincipalController">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FXML_InterfacePrincipalController">
   <children>
-    <MenuBar VBox.vgrow="NEVER">
-      <menus>
-        <Menu mnemonicParsing="false" text="File">
-          <items>
-            <MenuItem mnemonicParsing="false" text="New" />
-            <MenuItem mnemonicParsing="false" text="Open…" />
-            <Menu mnemonicParsing="false" text="Open Recent" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Close" />
-            <MenuItem mnemonicParsing="false" text="Save" />
-            <MenuItem mnemonicParsing="false" text="Save As…" />
-            <MenuItem mnemonicParsing="false" text="Revert" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Preferences…" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Quit" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Edit">
-          <items>
-            <MenuItem mnemonicParsing="false" text="Undo" />
-            <MenuItem mnemonicParsing="false" text="Redo" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Cut" />
-            <MenuItem mnemonicParsing="false" text="Copy" />
-            <MenuItem mnemonicParsing="false" text="Paste" />
-            <MenuItem mnemonicParsing="false" text="Delete" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Select All" />
-            <MenuItem mnemonicParsing="false" text="Unselect All" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Help">
-          <items>
-            <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
-          </items>
-        </Menu>
-      </menus>
-    </MenuBar>
-      <ToolBar nodeOrientation="LEFT_TO_RIGHT" prefHeight="118.0" prefWidth="835.0" scaleShape="false">
+      <ToolBar prefHeight="60.0" prefWidth="640.0">
          <items>
-            <HBox alignment="CENTER" prefHeight="108.0" prefWidth="718.0">
+            <VBox alignment="CENTER" prefHeight="47.0" prefWidth="120.0">
                <children>
-                  <VBox alignment="CENTER" prefHeight="100.0" prefWidth="170.0" spacing="5.0">
+                  <HBox prefHeight="30.0" prefWidth="149.0" spacing="6.0">
                      <children>
-                        <Button alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="140.0" text="Novo Programa">
+                        <Button mnemonicParsing="false">
                            <graphic>
                               <ImageView>
                                  <image>
-                                    <Image url="/icons/novo.png" />
+                                    <Image url="@/icons/novo.png" />
                                  </image>
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="140.0" text="Carregar Programa">
+                        <Button mnemonicParsing="false">
                            <graphic>
                               <ImageView>
                                  <image>
-                                    <Image url="/icons/carregar.png" />
+                                    <Image url="@/icons/carregar.png" />
                                  </image>
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="140.0" text="Salvar Programa">
+                        <Button mnemonicParsing="false">
                            <graphic>
                               <ImageView>
                                  <image>
-                                    <Image url="/icons/salvar.png" />
+                                    <Image url="@/icons/salvar.png" />
                                  </image>
                               </ImageView>
                            </graphic>
                         </Button>
+                     </children>
+                  </HBox>
+                  <HBox alignment="TOP_CENTER" prefHeight="20.0" prefWidth="120.0">
+                     <children>
                         <Label text="Arquivo" />
                      </children>
-                  </VBox>
-                  <Separator orientation="VERTICAL" prefHeight="108.0" prefWidth="0.0" />
-                  <VBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="235.0" spacing="5.0">
-                     <children>
-                        <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="235.0">
-                           <children>
-                              <VBox prefHeight="200.0" prefWidth="105.0" spacing="5.0">
-                                 <children>
-                                    <Button alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Começar">
-                                       <graphic>
-                                          <ImageView>
-                                             <image>
-                                                <Image url="/icons/comecar.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                    </Button>
-                                    <Button alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Pausar">
-                                       <graphic>
-                                          <ImageView>
-                                             <image>
-                                                <Image url="/icons/pausar.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                    </Button>
-                                    <Button alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Parar">
-                                       <graphic>
-                                          <ImageView>
-                                             <image>
-                                                <Image url="/icons/parar.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                    </Button>
-                                 </children>
-                              </VBox>
-                              <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0">
-                                 <children>
-                                    <Button alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Passar">
-                                       <graphic>
-                                          <ImageView>
-                                             <image>
-                                                <Image url="/icons/passar.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                    </Button>
-                                    <Button alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Continuar">
-                                       <graphic>
-                                          <ImageView>
-                                             <image>
-                                                <Image url="/icons/continuar.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                    </Button>
-                                    <Button alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Recomeçar">
-                                       <graphic>
-                                          <ImageView>
-                                             <image>
-                                                <Image url="/icons/recomecar.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                    </Button>
-                                 </children>
-                              </VBox>
-                           </children>
-                        </HBox>
-                        <Label text="Controle" />
-                     </children>
-                  </VBox>
-                  <Separator orientation="VERTICAL" prefHeight="200.0" prefWidth="4.0" />
-                  <VBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="145.0" spacing="5.0">
-                     <children>
-                        <Button alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="115.0" text="Set">
-                           <graphic>
-                              <ImageView>
-                                 <image>
-                                    <Image url="/icons/set.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="115.0" text="Deletar">
-                           <graphic>
-                              <ImageView>
-                                 <image>
-                                    <Image url="/icons/deletar.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="115.0" text="Deletar Todos">
-                           <graphic>
-                              <ImageView>
-                                 <image>
-                                    <Image url="/icons/deletarTudo.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Label text="Breakpoint" />
-                     </children>
-                  </VBox>
-                  <Separator orientation="VERTICAL" prefHeight="200.0" />
-                  <VBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="145.0" spacing="5.0">
-                     <children>
-                        <Button alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="115.0" text="Set">
-                           <graphic>
-                              <ImageView>
-                                 <image>
-                                    <Image url="/icons/set.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="115.0" text="Deletar">
-                           <graphic>
-                              <ImageView>
-                                 <image>
-                                    <Image url="/icons/deletar.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="115.0" text="Deletar Todos">
-                           <graphic>
-                              <ImageView>
-                                 <image>
-                                    <Image url="/icons/deletarTudo.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Label text="Dados Breakpoint" />
-                     </children>
-                  </VBox>
-                  <Separator orientation="VERTICAL" prefHeight="200.0" />
+                  </HBox>
                </children>
-            </HBox>
+            </VBox>
+            <Separator orientation="VERTICAL" prefHeight="50.0" prefWidth="0.0" />
+            <VBox alignment="CENTER" prefHeight="47.0" prefWidth="240.0">
+               <children>
+                  <HBox prefHeight="30.0" prefWidth="240.0" spacing="6.0">
+                     <children>
+                        <Button mnemonicParsing="false">
+                           <graphic>
+                              <ImageView>
+                                 <image>
+                                    <Image url="@/icons/comecar.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button mnemonicParsing="false">
+                           <graphic>
+                              <ImageView>
+                                 <image>
+                                    <Image url="@/icons/pausar.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button mnemonicParsing="false">
+                           <graphic>
+                              <ImageView>
+                                 <image>
+                                    <Image url="@/icons/parar.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button mnemonicParsing="false">
+                           <graphic>
+                              <ImageView>
+                                 <image>
+                                    <Image url="@/icons/passar.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button mnemonicParsing="false">
+                           <graphic>
+                              <ImageView>
+                                 <image>
+                                    <Image url="@/icons/continuar.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button mnemonicParsing="false">
+                           <graphic>
+                              <ImageView>
+                                 <image>
+                                    <Image url="@/icons/recomecar.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <HBox alignment="TOP_CENTER" prefHeight="20.0" prefWidth="240.0">
+                     <children>
+                        <Label alignment="TOP_CENTER" text="Controle" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <Separator orientation="VERTICAL" prefHeight="50.0" prefWidth="0.0" />
          </items>
       </ToolBar>
-      <HBox alignment="CENTER" maxWidth="200000.0" prefHeight="463.0" prefWidth="737.0" spacing="5.0">
-         <children>
-            <VBox alignment="TOP_CENTER" maxWidth="20000.0" prefWidth="280.0">
-               <children>
-                  <HBox>
-                     <children>
-                        <ListView fx:id="simplesemCode" maxWidth="1.7976931348623157E308" prefHeight="434.0" prefWidth="40.0" />
-                        <TableView editable="true">
-                          <columns>
-                            <TableColumn prefWidth="75.0" sortable="false" text="Código" />
-                          </columns>
-                           <columnResizePolicy>
-                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                           </columnResizePolicy>
-                        </TableView>
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
-            <VBox alignment="TOP_CENTER" prefWidth="140.0">
-               <children>
-                  <HBox>
-                     <children>
-                        <ListView fx:id="breakpoints" editable="true" prefHeight="434.0" prefWidth="40.0" />
-                        <TableView editable="true" prefHeight="200.0" prefWidth="100.0">
-                           <columns>
-                              <TableColumn prefWidth="75.0" sortable="false" text="Breakpoints" />
-                           </columns>
-                           <columnResizePolicy>
-                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                           </columnResizePolicy>
-                        </TableView>
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
-            <VBox alignment="TOP_CENTER">
-               <children>
-                  <HBox>
-                     <children>
-                        <ListView fx:id="dados" editable="true" prefHeight="434.0" prefWidth="40.0" />
-                        <TableView editable="true" prefWidth="100.0">
-                           <columns>
-                              <TableColumn prefWidth="75.0" sortable="false" text="Dados" />
-                           </columns>
-                           <columnResizePolicy>
-                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                           </columnResizePolicy>
-                        </TableView>
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
-            <VBox alignment="TOP_CENTER" prefWidth="140.0">
-               <children>
-                  <HBox>
-                     <children>
-                        <ListView fx:id="saida" editable="true" prefHeight="434.0" prefWidth="40.0" />
-                        <TableView editable="true" prefWidth="100.0">
-                           <columns>
-                              <TableColumn prefWidth="75.0" sortable="false" text="Saída" />
-                           </columns>
-                           <columnResizePolicy>
-                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                           </columnResizePolicy>
-                        </TableView>
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
-         </children>
-         <VBox.margin>
-            <Insets />
-         </VBox.margin>
-      </HBox>
+      <SplitPane dividerPositions="0.7" orientation="VERTICAL" VBox.vgrow="ALWAYS">
+        <items>
+            <SplitPane dividerPositions="0.8">
+               <items>
+                  <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+                    <tabs>
+                      <Tab text="Untitled">
+                           <content>
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <ListView fx:id="lvCodigo" prefHeight="187.0" prefWidth="30.0" />
+                                    <TextArea HBox.hgrow="ALWAYS" />
+                                 </children>
+                                 <padding>
+                                    <Insets left="10.0" />
+                                 </padding>
+                              </HBox>
+                           </content>
+                      </Tab>
+                    </tabs>
+                  </TabPane>
+                  <TableView editable="true" SplitPane.resizableWithParent="false">
+                    <columns>
+                      <TableColumn editable="false" maxWidth="30.0" prefWidth="30.0" resizable="false" sortable="false" />
+                      <TableColumn editable="false" maxWidth="1000.0" prefWidth="95.0" sortable="false" text="Dados" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+               </items>
+            </SplitPane>
+            <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" SplitPane.resizableWithParent="false">
+              <tabs>
+                <Tab text="Console">
+                     <content>
+                        <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0">
+                           <content>
+                              <TextArea prefHeight="62.0" prefWidth="638.0" />
+                           </content>
+                        </ScrollPane>
+                     </content>
+                </Tab>
+              </tabs>
+            </TabPane>
+        </items>
+      </SplitPane>
   </children>
 </VBox>

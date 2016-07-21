@@ -21,7 +21,7 @@ public class Main extends Application {
 			Scene scene = new Scene(root);
 			// primaryStage.getIcons().add(new
 			// Image(getClass().getResourceAsStream("Icone.png")));
-			primaryStage.setResizable(false);
+//			primaryStage.setResizable(false);
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch (Exception e) {

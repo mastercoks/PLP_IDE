@@ -1,8 +1,6 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
 
 public class Codigo {
 	private ArrayList<String> linhas;
