@@ -25,17 +25,17 @@ public class Codigo {
 			} else if (argumento != "") {
 				switch (argumento) {
 				case "set":
-					System.out.println("Instrução set");
+					System.out.println("InstruÃ§Ã£o set");
 					break;
 				case "jump":
 
-					System.out.println("Instrução jump");
+					System.out.println("InstruÃ§Ã£o jump");
 					break;
 				case "jumpt":
-					System.out.println("Instrução jumpt");
+					System.out.println("InstruÃ§Ã£o jumpt");
 					break;
 				default:
-					System.out.println("Instrução desconhecida: " + argumento);
+					System.out.println("InstruÃ§Ã£o desconhecida: " + argumento);
 					return null;
 				}
 			}
@@ -90,7 +90,7 @@ public class Codigo {
 			if (temp != null) {
 				System.out.print(temp);
 			} else {
-				System.err.println("\nErro léxico encontrado!");
+				System.err.println("\nErro lÃ©xico encontrado!");
 				return false;
 			}
 		} while (linha.length() != 0);
@@ -149,7 +149,7 @@ public class Codigo {
 	public static void main(String[] args) {
 		Codigo cod = new Codigo();
 		// cod.insereLinha("SET 10 , D [ 10 ] ");
-		cod.insereLinha("set 0, rad");
+		cod.insereLinha("set 0, read");
 		cod.insereLinha("set 1, read");
 		cod.insereLinha("jumpt 8, d[0]=d[1]");
 		cod.insereLinha("jumpt 6, d[0] <= d[1]");
@@ -170,7 +170,7 @@ public class Codigo {
 		System.out.println(" : " + cod.analiseLexicaAux(7));
 		System.out.println(" : " + cod.analiseLexicaAux(8));
 
-		// 9 = dígito
+		// 9 = dÃ­gito
 		// 2 = letra minuscula
 		// 1 = letra maiscula
 		// 25 = caracter especial < > =
