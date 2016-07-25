@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
@@ -28,7 +28,7 @@
                      <children>
                         <Button mnemonicParsing="false">
                            <graphic>
-                              <ImageView>
+                              <ImageView fitHeight="16.0" fitWidth="16.0" preserveRatio="true" smooth="false">
                                  <image>
                                     <Image url="@/icons/novo.png" />
                                  </image>
@@ -37,7 +37,7 @@
                         </Button>
                         <Button mnemonicParsing="false">
                            <graphic>
-                              <ImageView>
+                              <ImageView fitHeight="16.0" fitWidth="16.0" preserveRatio="true" smooth="false">
                                  <image>
                                     <Image url="@/icons/carregar.png" />
                                  </image>
@@ -46,7 +46,7 @@
                         </Button>
                         <Button mnemonicParsing="false">
                            <graphic>
-                              <ImageView>
+                              <ImageView fitHeight="16.0" fitWidth="16.0" preserveRatio="true" smooth="false">
                                  <image>
                                     <Image url="@/icons/salvar.png" />
                                  </image>
@@ -69,7 +69,7 @@
                      <children>
                         <Button mnemonicParsing="false">
                            <graphic>
-                              <ImageView>
+                              <ImageView fitHeight="16.0" fitWidth="16.0" preserveRatio="true" smooth="false">
                                  <image>
                                     <Image url="@/icons/comecar.png" />
                                  </image>
@@ -78,7 +78,7 @@
                         </Button>
                         <Button mnemonicParsing="false">
                            <graphic>
-                              <ImageView>
+                              <ImageView fitHeight="16.0" fitWidth="16.0" preserveRatio="true" smooth="false">
                                  <image>
                                     <Image url="@/icons/pausar.png" />
                                  </image>
@@ -87,7 +87,7 @@
                         </Button>
                         <Button mnemonicParsing="false">
                            <graphic>
-                              <ImageView>
+                              <ImageView fitHeight="16.0" fitWidth="16.0" preserveRatio="true" smooth="false">
                                  <image>
                                     <Image url="@/icons/parar.png" />
                                  </image>
@@ -96,7 +96,7 @@
                         </Button>
                         <Button mnemonicParsing="false">
                            <graphic>
-                              <ImageView>
+                              <ImageView fitHeight="16.0" fitWidth="16.0" preserveRatio="true" smooth="false">
                                  <image>
                                     <Image url="@/icons/passar.png" />
                                  </image>
@@ -105,7 +105,7 @@
                         </Button>
                         <Button mnemonicParsing="false">
                            <graphic>
-                              <ImageView>
+                              <ImageView fitHeight="16.0" fitWidth="16.0" preserveRatio="true" smooth="false">
                                  <image>
                                     <Image url="@/icons/continuar.png" />
                                  </image>
@@ -114,7 +114,7 @@
                         </Button>
                         <Button mnemonicParsing="false">
                            <graphic>
-                              <ImageView>
+                              <ImageView fitHeight="16.0" fitWidth="16.0" preserveRatio="true" smooth="false">
                                  <image>
                                     <Image url="@/icons/recomecar.png" />
                                  </image>
@@ -143,7 +143,7 @@
                            <content>
                               <HBox prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <ListView fx:id="lvCodigo" prefHeight="187.0" prefWidth="30.0" />
+                                    <ListView fx:id="lvCodigo" maxWidth="30.0" minWidth="30.0" prefWidth="30.0" style="-fx-text-alignment: right;" stylesheets="@../css/listViewStylesheets.css" HBox.hgrow="NEVER" />
                                     <TextArea HBox.hgrow="ALWAYS" />
                                  </children>
                                  <padding>

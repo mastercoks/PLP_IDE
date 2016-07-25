@@ -149,7 +149,7 @@ public class Codigo {
 	public static void main(String[] args) {
 		Codigo cod = new Codigo();
 		// cod.insereLinha("SET 10 , D [ 10 ] ");
-		cod.insereLinha("set 0, read");
+		cod.insereLinha("set 0, rad");
 		cod.insereLinha("set 1, read");
 		cod.insereLinha("jumpt 8, d[0]=d[1]");
 		cod.insereLinha("jumpt 6, d[0] <= d[1]");
