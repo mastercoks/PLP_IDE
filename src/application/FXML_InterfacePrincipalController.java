@@ -5,6 +5,7 @@
  */
 package application;
 
+import com.sun.javafx.collections.ElementObservableListDecorator;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -12,6 +13,10 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollBar;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
+import javax.swing.JTextArea;
 
 /**
  * FXML Controller class
@@ -20,9 +25,50 @@ import javafx.scene.control.ListView;
  */
 public class FXML_InterfacePrincipalController implements Initializable {
 
-	@FXML
+    
+    ObservableList<Integer> Lines =  FXCollections.observableArrayList() ;
+    
+    @FXML
 	private ListView<Integer> lvCodigo;
-
+    @FXML
+    private TextArea TextAreaCodigo;
+    
+    private JTextArea TempText = new JTextArea();
+    private ScrollPane scrool;
+    
+    
+    
+    public  ObservableList numLinhaVector(int NumLines){
+        Lines.clear();
+        for (int i = 0; i < NumLines; i++) {
+            Lines.add(i,i);
+        }
+        return Lines;
+    }
+    
+   
+    
+    @FXML
+    public void sincroniaScrool(){
+        
+       
+        
+ 
+               
+        lvCodigo.setFixedCellSize(20.1);
+        TempText.setText(TextAreaCodigo.getText());
+       
+        numLinhaVector(TempText.getLineCount());
+        lvCodigo.setItems(Lines);
+               
+        
+        //Lines.add(index, Integer.SIZE);
+        lvCodigo.scrollTo((int) TextAreaCodigo.getScrollTop());
+        
+      
+    }
+    
+    
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		ObservableList<Integer> data = FXCollections.observableArrayList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
@@ -31,7 +77,10 @@ public class FXML_InterfacePrincipalController implements Initializable {
 		// tbCodigo.setItems(FXCollections.observableArrayList(codigo));
 		// tbCodigo.getColumns().add(tcCodigo);
 		// tbCodigo.setItems(codigo);
-		lvCodigo.setItems(data);
+		//lvCodigo.setItems(data);
+                 
+                
 	}
+        
 
 }
