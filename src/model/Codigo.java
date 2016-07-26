@@ -83,6 +83,78 @@ public class Codigo {
 		return lexeme;
 	}
 
+	public boolean analiseSintatica(int index) {
+		// this.linha = linha;
+		linha = linhas.get(index);
+		switch (analiseLexica()) {
+		case "set":
+			return true;
+		// break;
+		case "jump":
+			try {
+				int num = Integer.parseInt(analiseLexica());
+				if (analiseLexica().equals("fim")) {
+					// INSERIR CODIGO AQUI
+					System.out.print(num);
+					return true;
+				}
+			} catch (Exception e) {
+				System.err.println("Erro sintatico na linha " + index);
+			}
+
+			break;
+		case "jumpt":
+			try {
+				int num = Integer.parseInt(analiseLexica());
+				if (analiseLexica().equals(",")) {
+					int numDado1 = analiseDado();
+					String sinal = analiseLexica();
+					int numDado2 = analiseDado();
+					if (analiseLexica().equals("fim")) {
+						// INSERIR CODIGO AQUI
+						System.out.print(num + ", " + numDado1 + sinal + numDado2);
+						return true;
+					}
+				}
+			} catch (Exception e) {
+				System.err.println("Erro sintatico na linha " + index);
+			}
+
+			return true;
+		// break;
+		default:
+			break;
+		}
+		return false;
+	}
+	
+	private boolean checarComparacao(int num1, int num2, String sinal) {
+		boolean resultado = false;
+		switch (sinal) {
+		case "=":
+			resultado = num1 == num2;
+		case ">":
+			resultado = num1 > num2;
+		case "<": 
+			resultado =  num1 < num2;
+		case "<=":
+			resultado = num1 <= num2;
+		case ">=":
+			resultado = num1 >= num2;
+		}
+		return resultado;
+	}
+
+	private Integer analiseDado() {
+		if (analiseLexica().equals("d") && analiseLexica().equals("[")) {
+			int num = Integer.parseInt(analiseLexica());
+			if (analiseLexica().equals("]")) {
+				return num;
+			}
+		}
+		return null;
+	}
+
 	public boolean analiseLexicaAux(int index) {
 		linha = linhas.get(index);
 		do {
@@ -101,6 +173,18 @@ public class Codigo {
 		String lexeme = "";
 		Caracter nextChar = getChar();
 		Caracter nextCharAux;
+
+		if (nextChar == null) {
+			return "fim";
+		}
+
+		while (nextChar.getCharClass().equals("Espaco")) {
+			nextChar = getChar();
+			if (nextChar == null) {
+				return "fim";
+			}
+		}
+
 		switch (nextChar.getCharClass()) {
 		case "Digito":
 			do {
@@ -125,17 +209,18 @@ public class Codigo {
 					|| (nextCharAux != null && nextChar.getCharClass() == "Letra"));
 
 			if (lookupString(lexeme)) {
-				if (nextChar.getCharClass().equals("Espaco")) {
-					lexeme = addChar(lexeme, nextChar.getNextChar());
-				} else if (nextCharAux != null) {
+				// if (nextChar.getCharClass().equals("Espaco")) {
+				// lexeme = addChar(lexeme, nextChar.getNextChar());
+				// } else
+				if (nextCharAux != null) {
 					linha = nextChar.getNextChar() + linha;
 				}
 				return lexeme;
 			}
 			break;
-		case "Espaco":
-			// nextChar = getChar();
-			return lexeme;
+		// case "Espaco":
+		// // nextChar = getChar();
+		// return lexeme;
 		case "Desconhecido":
 			if (lookupChar(nextChar.getNextChar())) {
 				lexeme = addChar(lexeme, nextChar.getNextChar());
@@ -143,12 +228,18 @@ public class Codigo {
 			}
 			break;
 		}
-		return null;
+		return "error";
 	}
 
 	public static void main(String[] args) {
 		Codigo cod = new Codigo();
-		// cod.insereLinha("SET 10 , D [ 10 ] ");
+		cod.insereLinha("SET 10 , D [ 10 ] ");
+		cod.insereLinha("jump 7 ");
+		cod.insereLinha("jump 100000 10");
+		cod.insereLinha("jump  24 ,");
+		cod.insereLinha("jump 10 set");
+		cod.insereLinha("jump read");
+
 		cod.insereLinha("set 0, read");
 		cod.insereLinha("set 1, read");
 		cod.insereLinha("jumpt 8, d[0]=d[1]");
@@ -160,15 +251,15 @@ public class Codigo {
 		cod.insereLinha("set write, d[0]");
 		// cod.insereLinha("jumpt teste");
 		// cod.interpretaLinha(0);
-		System.out.println(" : " + cod.analiseLexicaAux(0));
-		System.out.println(" : " + cod.analiseLexicaAux(1));
-		System.out.println(" : " + cod.analiseLexicaAux(2));
-		System.out.println(" : " + cod.analiseLexicaAux(3));
-		System.out.println(" : " + cod.analiseLexicaAux(4));
-		System.out.println(" : " + cod.analiseLexicaAux(5));
-		System.out.println(" : " + cod.analiseLexicaAux(6));
-		System.out.println(" : " + cod.analiseLexicaAux(7));
-		System.out.println(" : " + cod.analiseLexicaAux(8));
+		System.out.println(" : " + cod.analiseSintatica(0));
+		System.out.println(" : " + cod.analiseSintatica(1));
+		System.out.println(" : " + cod.analiseSintatica(2));
+		System.out.println(" : " + cod.analiseSintatica(3));
+		System.out.println(" : " + cod.analiseSintatica(4));
+		System.out.println(" : " + cod.analiseSintatica(5));
+		System.out.println(" : " + cod.analiseSintatica(6));
+		System.out.println(" : " + cod.analiseSintatica(7));
+		System.out.println(" : " + cod.analiseSintatica(8));
 
 		// 9 = d�gito
 		// 2 = letra minuscula
