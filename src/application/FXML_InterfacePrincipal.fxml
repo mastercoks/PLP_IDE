@@ -17,6 +17,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FXML_InterfacePrincipalController">
   <children>
@@ -143,8 +144,11 @@
                            <content>
                               <HBox prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <ListView fx:id="lvCodigo" maxWidth="30.0" minWidth="30.0" prefWidth="30.0" style="-fx-text-alignment: right;" stylesheets="@../css/listViewStylesheets.css" HBox.hgrow="NEVER" />
-                                    <TextArea HBox.hgrow="ALWAYS" />
+                                    <ListView fx:id="lvCodigo" prefHeight="187.0" prefWidth="30.0" />
+                                    <TextArea fx:id="TextAreaCodigo" onKeyPressed="#sincroniaScrool" onKeyReleased="#sincroniaScrool" onScrollStarted="#sincroniaScrool" HBox.hgrow="ALWAYS">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font></TextArea>
                                  </children>
                                  <padding>
                                     <Insets left="10.0" />
