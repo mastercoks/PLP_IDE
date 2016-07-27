@@ -14,7 +14,9 @@ bin/
 .classpath
 .project
 .settings/
-nbproject/private/
+build.xml
+manifest.mf
+nbproject/
 build/
 nbbuild/
 dist/
