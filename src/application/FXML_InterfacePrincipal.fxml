@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -19,7 +25,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FXML_InterfacePrincipalController">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FXML_InterfacePrincipalController">
   <children>
       <ToolBar prefHeight="60.0" prefWidth="640.0">
          <items>
@@ -27,7 +33,7 @@
                <children>
                   <HBox prefHeight="30.0" prefWidth="149.0" spacing="6.0">
                      <children>
-                        <Button mnemonicParsing="false">
+                        <Button mnemonicParsing="false" onAction="#novo">
                            <graphic>
                               <ImageView fitHeight="16.0" fitWidth="16.0" preserveRatio="true" smooth="false">
                                  <image>
@@ -35,8 +41,11 @@
                                  </image>
                               </ImageView>
                            </graphic>
+                           <tooltip>
+                              <Tooltip text="Novo" />
+                           </tooltip>
                         </Button>
-                        <Button mnemonicParsing="false">
+                        <Button mnemonicParsing="false" onAction="#buscarArquivo">
                            <graphic>
                               <ImageView fitHeight="16.0" fitWidth="16.0" preserveRatio="true" smooth="false">
                                  <image>
@@ -44,8 +53,11 @@
                                  </image>
                               </ImageView>
                            </graphic>
+                           <tooltip>
+                              <Tooltip text="Abrir" />
+                           </tooltip>
                         </Button>
-                        <Button mnemonicParsing="false">
+                        <Button mnemonicParsing="false" onAction="#salvarArquivo">
                            <graphic>
                               <ImageView fitHeight="16.0" fitWidth="16.0" preserveRatio="true" smooth="false">
                                  <image>
@@ -53,6 +65,9 @@
                                  </image>
                               </ImageView>
                            </graphic>
+                           <tooltip>
+                              <Tooltip text="Salvar" />
+                           </tooltip>
                         </Button>
                      </children>
                   </HBox>
@@ -76,6 +91,9 @@
                                  </image>
                               </ImageView>
                            </graphic>
+                           <tooltip>
+                              <Tooltip text="Play" />
+                           </tooltip>
                         </Button>
                         <Button mnemonicParsing="false">
                            <graphic>
@@ -85,6 +103,9 @@
                                  </image>
                               </ImageView>
                            </graphic>
+                           <tooltip>
+                              <Tooltip text="Pause" />
+                           </tooltip>
                         </Button>
                         <Button mnemonicParsing="false">
                            <graphic>
@@ -94,6 +115,9 @@
                                  </image>
                               </ImageView>
                            </graphic>
+                           <tooltip>
+                              <Tooltip text="Stop" />
+                           </tooltip>
                         </Button>
                         <Button mnemonicParsing="false">
                            <graphic>
@@ -103,6 +127,9 @@
                                  </image>
                               </ImageView>
                            </graphic>
+                           <tooltip>
+                              <Tooltip text="Proximo" />
+                           </tooltip>
                         </Button>
                         <Button mnemonicParsing="false">
                            <graphic>
@@ -112,6 +139,9 @@
                                  </image>
                               </ImageView>
                            </graphic>
+                           <tooltip>
+                              <Tooltip text="Continuar" />
+                           </tooltip>
                         </Button>
                         <Button mnemonicParsing="false">
                            <graphic>
@@ -121,6 +151,9 @@
                                  </image>
                               </ImageView>
                            </graphic>
+                           <tooltip>
+                              <Tooltip text="Recomeçar" />
+                           </tooltip>
                         </Button>
                      </children>
                   </HBox>
@@ -138,33 +171,37 @@
         <items>
             <SplitPane dividerPositions="0.8">
                <items>
-                  <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+                  <TabPane fx:id="tablePane" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
                     <tabs>
-                      <Tab text="Untitled">
+                      <Tab fx:id="tabMain" text="Untitled">
                            <content>
-                              <HBox prefHeight="100.0" prefWidth="200.0">
-                                 <children>
-                                    <ListView fx:id="lvCodigo" prefHeight="187.0" prefWidth="30.0" />
-                                    <TextArea fx:id="TextAreaCodigo" onKeyPressed="#sincroniaScrool" onKeyReleased="#sincroniaScrool" onScrollStarted="#sincroniaScrool" HBox.hgrow="ALWAYS">
-                                       <font>
-                                          <Font size="13.0" />
-                                       </font></TextArea>
-                                 </children>
-                                 <padding>
-                                    <Insets left="10.0" />
-                                 </padding>
-                              </HBox>
+                              <ScrollPane fx:id="scrollPane" fitToWidth="true" hbarPolicy="NEVER" prefHeight="205.0" prefViewportHeight="205.0" prefViewportWidth="507.0" prefWidth="309.0" vbarPolicy="ALWAYS">
+                                 <content>
+                                    <BorderPane>
+                                       <left>
+                                          <ListView fx:id="lvCodigo" onMouseClicked="#selectBreakPoints" prefHeight="187.0" prefWidth="30.0" stylesheets="@../css/listViewStylesheets.css" BorderPane.alignment="CENTER" />
+                                       </left>
+                                       <center>
+                                          <TextArea fx:id="TextAreaCodigo" onKeyTyped="#sincroniaScrool" onScroll="#sincroniaScrool" prefHeight="145.0" prefWidth="463.0" stylesheets="@../css/stylesheets.css" wrapText="true" BorderPane.alignment="CENTER">
+                                             <font>
+                                                <Font size="13.0" />
+                                             </font>
+                                          </TextArea>
+                                       </center>
+                                    </BorderPane>
+                                 </content>
+                              </ScrollPane>
                            </content>
                       </Tab>
                     </tabs>
                   </TabPane>
-                  <TableView editable="true" SplitPane.resizableWithParent="false">
+                  <TableView fx:id="tabelaDados" editable="true" prefHeight="220.0" prefWidth="40.0" SplitPane.resizableWithParent="false">
                     <columns>
-                      <TableColumn editable="false" maxWidth="30.0" prefWidth="30.0" resizable="false" sortable="false" />
-                      <TableColumn editable="false" maxWidth="1000.0" prefWidth="95.0" sortable="false" text="Dados" />
+                        <TableColumn fx:id="id" editable="false" prefWidth="34.0" text="ID" />
+                      <TableColumn editable="false" maxWidth="1000.0" prefWidth="91.0" sortable="false" text="Dados" />
                     </columns>
                      <columnResizePolicy>
-                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                        
                      </columnResizePolicy>
                   </TableView>
                </items>
@@ -175,7 +212,7 @@
                      <content>
                         <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0">
                            <content>
-                              <TextArea prefHeight="62.0" prefWidth="638.0" />
+                              <TextArea fx:id="console" prefHeight="62.0" prefWidth="638.0" />
                            </content>
                         </ScrollPane>
                      </content>

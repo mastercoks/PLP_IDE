@@ -7,3 +7,12 @@
 .table-row-cell:odd:filled:selected {
   -fx-background: -fx-control-inner-background-alt ;
 }
+
+
+
+.textArea.scroll-bar:vertical .increment-arrow,
+.textArea.scroll-bar:vertical .decrement-arrow,
+.textArea.scroll-bar:vertical .increment-button,
+.textArea.scroll-bar:vertical .decrement-button {
+    -fx-padding:0.0;
+}
