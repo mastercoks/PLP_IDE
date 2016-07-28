@@ -144,11 +144,16 @@
                            <content>
                               <HBox prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <ListView fx:id="lvCodigo" prefHeight="187.0" prefWidth="30.0" />
-                                    <TextArea fx:id="TextAreaCodigo" onKeyPressed="#sincroniaScrool" onKeyReleased="#sincroniaScrool" onScrollStarted="#sincroniaScrool" HBox.hgrow="ALWAYS">
+                                    <ListView fx:id="lvCodigo" fixedCellSize="20.0" prefHeight="203.0" prefWidth="128.0" stylesheets="@../css/listViewStylesheets.css">
+                                       <HBox.margin>
+                                          <Insets top="2.0" />
+                                       </HBox.margin>
+                                    </ListView>
+                                    <TextArea fx:id="TextAreaCodigo" onKeyPressed="#sincroniaScrool" onKeyReleased="#sincroniaScrool" onScroll="#sincroniaScrool" onScrollFinished="#sincroniaScrool" onScrollStarted="#sincroniaScrool" HBox.hgrow="ALWAYS">
                                        <font>
-                                          <Font size="13.0" />
-                                       </font></TextArea>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </TextArea>
                                  </children>
                                  <padding>
                                     <Insets left="10.0" />
