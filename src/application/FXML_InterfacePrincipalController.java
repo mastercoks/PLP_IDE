@@ -5,7 +5,6 @@
  */
 package application;
 
-import com.sun.javafx.collections.ElementObservableListDecorator;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -13,42 +12,29 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.util.Scanner;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.MultipleSelectionModel;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.Tab;
-import javafx.scene.control.TabBuilder;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import javafx.stage.Window;
-import javafx.util.Callback;
-import javax.print.attribute.IntegerSyntax;
+import model.Codigo;
 
 /**
  * FXML Controller class
@@ -59,7 +45,8 @@ public class FXML_InterfacePrincipalController implements Initializable {
 
     ObservableList<Integer> Lines = FXCollections.observableArrayList();
     ObservableList<Integer> breakPoints = FXCollections.observableArrayList();
-
+    ArrayList<String> ArrayLinha = new ArrayList<String>();
+    Codigo codigo = new Codigo(ArrayLinha);
     boolean fileSaved = false;
 
     @FXML
@@ -80,6 +67,8 @@ public class FXML_InterfacePrincipalController implements Initializable {
     private TabPane tablePane;
     @FXML
     private Tab tabMain;
+    @FXML
+    private TableColumn<LinhaTabela,Integer> dados;
 
     public ObservableList numLinhaVector(int NumLines) {
         Lines.clear();
@@ -131,13 +120,15 @@ public class FXML_InterfacePrincipalController implements Initializable {
         scrollPane.setFitToHeight(true);
         LinhaTabela dadosTabela = new LinhaTabela(0, 0);
 
-        for (int i = 0; i < 10; i++) {
-            list.add(new LinhaTabela(i, 0));
+        for (int i = 0; i < codigo.getDados().size(); i++) {
+            list.add(new LinhaTabela(i, codigo.getDados().get(i)));
         }
 
         id.setCellValueFactory(cellData -> cellData.getValue().getId().asObject());
 
+        dados.setCellValueFactory(cellData -> cellData.getValue().getDado().asObject());
         tabelaDados.setItems(list);
+        
 
     }
 
@@ -239,6 +230,28 @@ public class FXML_InterfacePrincipalController implements Initializable {
     }
 
     @FXML
+    public void play() {
+        
+        Codigo codigo = new Codigo(ArrayLinha);
+//        codigo.executar(inicio, fim); //return ArrayList<String>
+
+        for (int i = 0; i < TextAreaCodigo.getParagraphs().size(); i++) {
+            ArrayLinha.add(TextAreaCodigo.getParagraphs().get(i).toString());
+        }
+
+    }
+
+    public void selectLinha(String LiString) {
+
+        String linhaRecebida = "casa doida de coqueiro";
+        String texto;
+        texto = TextAreaCodigo.getText();
+
+        TextAreaCodigo.setStyle("-fx-highlight-fill: lightgray; -fx-highlight-text-fill: firebrick; ");
+        TextAreaCodigo.selectRange(texto.indexOf(linhaRecebida), texto.indexOf(linhaRecebida) + linhaRecebida.length());
+    }
+
+    @FXML
     private void selectBreakPoints(MouseEvent event) {
         lvCodigo.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
@@ -270,5 +283,16 @@ public class FXML_InterfacePrincipalController implements Initializable {
 //                }
 //            });
         }
+    }
+
+    @FXML
+    private void selectLinha(ActionEvent event) {
+        String linhaRecebida = "casa doida de coqueiro";
+        String texto;
+        texto = TextAreaCodigo.getText();
+
+        TextAreaCodigo.setStyle("-fx-highlight-fill: lightgray; -fx-highlight-text-fill: firebrick; ");
+        TextAreaCodigo.selectRange(texto.indexOf(linhaRecebida), texto.indexOf(linhaRecebida) + linhaRecebida.length());
+  
     }
 }
