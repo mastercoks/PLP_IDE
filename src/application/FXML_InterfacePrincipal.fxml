@@ -83,7 +83,7 @@
                <children>
                   <HBox prefHeight="30.0" prefWidth="240.0" spacing="6.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#play">
+                        <Button fx:id="butonPlay" mnemonicParsing="false" onAction="#play">
                            <graphic>
                               <ImageView fitHeight="16.0" fitWidth="16.0" preserveRatio="true" smooth="false">
                                  <image>
@@ -95,19 +95,7 @@
                               <Tooltip text="Play" />
                            </tooltip>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#selectLinha">
-                           <graphic>
-                              <ImageView fitHeight="16.0" fitWidth="16.0" preserveRatio="true" smooth="false">
-                                 <image>
-                                    <Image url="@/icons/pausar.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <tooltip>
-                              <Tooltip text="Pause" />
-                           </tooltip>
-                        </Button>
-                        <Button mnemonicParsing="false">
+                        <Button fx:id="buttonStop" mnemonicParsing="false" onAction="#buttonStop">
                            <graphic>
                               <ImageView fitHeight="16.0" fitWidth="16.0" preserveRatio="true" smooth="false">
                                  <image>
@@ -119,7 +107,7 @@
                               <Tooltip text="Stop" />
                            </tooltip>
                         </Button>
-                        <Button mnemonicParsing="false">
+                        <Button fx:id="butonNext" mnemonicParsing="false" onAction="#buttonNext">
                            <graphic>
                               <ImageView fitHeight="16.0" fitWidth="16.0" preserveRatio="true" smooth="false">
                                  <image>
@@ -131,7 +119,7 @@
                               <Tooltip text="Proximo" />
                            </tooltip>
                         </Button>
-                        <Button mnemonicParsing="false">
+                        <Button fx:id="butonContinuar" mnemonicParsing="false" onAction="#buttonContinuar">
                            <graphic>
                               <ImageView fitHeight="16.0" fitWidth="16.0" preserveRatio="true" smooth="false">
                                  <image>
@@ -141,18 +129,6 @@
                            </graphic>
                            <tooltip>
                               <Tooltip text="Continuar" />
-                           </tooltip>
-                        </Button>
-                        <Button mnemonicParsing="false">
-                           <graphic>
-                              <ImageView fitHeight="16.0" fitWidth="16.0" preserveRatio="true" smooth="false">
-                                 <image>
-                                    <Image url="@/icons/recomecar.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <tooltip>
-                              <Tooltip text="Recomeçar" />
                            </tooltip>
                         </Button>
                      </children>

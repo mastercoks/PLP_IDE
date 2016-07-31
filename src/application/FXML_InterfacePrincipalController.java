@@ -14,14 +14,14 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import javafx.application.Platform;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
@@ -31,6 +31,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
@@ -50,7 +51,7 @@ public class FXML_InterfacePrincipalController implements Initializable {
     boolean fileSaved = false;
 
     @FXML
-    private ListView<Integer> lvCodigo;
+    public ListView<Integer> lvCodigo;
     @FXML
     private TextArea TextAreaCodigo;
     @FXML
@@ -68,7 +69,15 @@ public class FXML_InterfacePrincipalController implements Initializable {
     @FXML
     private Tab tabMain;
     @FXML
-    private TableColumn<LinhaTabela,Integer> dados;
+    private TableColumn<LinhaTabela, Integer> dados;
+    @FXML
+    private Button butonNext;
+    @FXML
+    private Button butonContinuar;
+    @FXML
+    private Button butonPlay;
+    @FXML
+    private Button buttonStop;
 
     public ObservableList numLinhaVector(int NumLines) {
         Lines.clear();
@@ -83,9 +92,11 @@ public class FXML_InterfacePrincipalController implements Initializable {
         return Lines;
     }
 
+    int LINHAEMEXECUSSAO;
+
     @FXML
     public void sincroniaScrool() {
-        // ScrollBar scrollBarv = (ScrollBar) TextAreaCodigo.lookup(".scroll-bar:vertical");
+        
         int size = TextAreaCodigo.getParagraphs().size() * 20;
 
         if (scrollPane.getHeight() <= size) {
@@ -100,26 +111,12 @@ public class FXML_InterfacePrincipalController implements Initializable {
         lvCodigo.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         lvCodigo.setItems(numLinhaVector(TextAreaCodigo.getParagraphs().size()));
         refreshSelection();
-        //Lines.add(index, Integer.SIZE);
+       
 //        
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        //ObservableList<Integer> data = FXCollections.observableArrayList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
-
-        // ObservableList<String> codigo = FXCollections.observableArrayList(
-        // "Teste 1","Teste 2","Teste 3","Teste 4","Teste 5");
-        // tbCodigo.setItems(FXCollections.observableArrayList(codigo));
-        // tbCodigo.getColumns().add(tcCodigo);
-        // tbCodigo.setItems(codigo);
-        //lvCodigo.setItems(data);
-        // lvCodigo.setSelectionModel(new MultipleSelectionModel<Integer>);
-        //lvCodigo.setDisable(true);
+    public void refreshDate() {
         ObservableList<LinhaTabela> list = FXCollections.observableArrayList();
-        scrollPane.setFitToHeight(true);
-        LinhaTabela dadosTabela = new LinhaTabela(0, 0);
-
         for (int i = 0; i < codigo.getDados().size(); i++) {
             list.add(new LinhaTabela(i, codigo.getDados().get(i)));
         }
@@ -128,7 +125,17 @@ public class FXML_InterfacePrincipalController implements Initializable {
 
         dados.setCellValueFactory(cellData -> cellData.getValue().getDado().asObject());
         tabelaDados.setItems(list);
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
         
+        scrollPane.setFitToHeight(true);
+        
+        refreshDate();
+        butonContinuar.setDisable(true);
+        butonNext.setDisable(true);
+        buttonStop.setDisable(true);
 
     }
 
@@ -229,21 +236,170 @@ public class FXML_InterfacePrincipalController implements Initializable {
 
     }
 
-    @FXML
-    public void play() {
-        
-        Codigo codigo = new Codigo(ArrayLinha);
-//        codigo.executar(inicio, fim); //return ArrayList<String>
-
+    public void refreshArrayLine() {
+        ArrayLinha.clear();
         for (int i = 0; i < TextAreaCodigo.getParagraphs().size(); i++) {
             ArrayLinha.add(TextAreaCodigo.getParagraphs().get(i).toString());
         }
+    }
 
+    @FXML
+    public void play() throws InterruptedException {
+        refreshArrayLine();
+        System.out.println(ArrayLinha);
+        refreshDate();
+        breakPoints.sorted();
+
+        Codigo codigo = new Codigo(ArrayLinha);
+
+        if (ArrayLinha.get(ArrayLinha.size() - 1).equals("halt")) {
+            if (!ArrayLinha.isEmpty()) {
+                buttonStop.setDisable(false);
+                butonPlay.setDisable(true);
+                TextAreaCodigo.setEditable(false);
+                lvCodigo.setDisable(true);
+                butonNext.setDisable(true);
+                butonContinuar.setDisable(true);
+                espera(LINHAEMEXECUSSAO);
+
+            }
+        } else {
+            Alert dialogoInfo = new Alert(Alert.AlertType.INFORMATION);
+            dialogoInfo.setTitle("Diálogo de informação");
+            dialogoInfo.setHeaderText("Seu Programa não possui marcador de Fim(halt)");
+            dialogoInfo.setContentText("Verifique se a ultima Linha não está em branco");
+            dialogoInfo.showAndWait();
+        }
+
+    }
+    Timeline timer;
+
+    public void espera(int index) {
+        lvCodigo.getSelectionModel().select(index);
+        timer = new Timeline(new KeyFrame(javafx.util.Duration.seconds(1), (e) -> {
+
+            if (breakPoints.contains(index)) {
+                butonNext.setDisable(false);
+                butonContinuar.setDisable(false);
+                LINHAEMEXECUSSAO = index;
+                refreshDate();
+                //selectLinha(ArrayLinha.get(index));
+
+            } else if (ArrayLinha.size() - 1 != index) {
+                LINHAEMEXECUSSAO = index;
+                System.out.println(LINHAEMEXECUSSAO);
+               
+                lvCodigo.getSelectionModel().selectNext();
+                lvCodigo.getSelectionModel().clearSelection(index);
+                espera(lvCodigo.getSelectionModel().getSelectedIndex());
+                refreshDate();
+            }else if(ArrayLinha.size() - 1 == index){
+               buttonStop.setDisable(true);
+               System.out.println("PARADA");
+                buttonStop();
+            }
+
+        }));
+        timer.play();
+    }
+
+    @FXML
+    public void buttonNext() {
+        
+        if (breakPoints.contains(LINHAEMEXECUSSAO)) {
+           
+            lvCodigo.getSelectionModel().selectNext();
+
+            LINHAEMEXECUSSAO = lvCodigo.getSelectionModel().getSelectedIndex();
+            refreshDate();
+        }
+        else if (ArrayLinha.size() - 1 == LINHAEMEXECUSSAO) {
+            LINHAEMEXECUSSAO = lvCodigo.getSelectionModel().getSelectedIndex();
+            lvCodigo.getSelectionModel().clearSelection();
+            butonPlay.setDisable(false);
+            lvCodigo.setDisable(false);
+            TextAreaCodigo.setEditable(true);
+            butonNext.setDisable(false);
+            refreshDate();
+            refreshArrayLine();
+            refreshSelection();
+            refreshDate();
+        } else {
+           
+
+            lvCodigo.getSelectionModel().select(LINHAEMEXECUSSAO + 1);
+            lvCodigo.getSelectionModel().clearSelection(LINHAEMEXECUSSAO);
+            refreshSelection();
+            LINHAEMEXECUSSAO = lvCodigo.getSelectionModel().getSelectedIndex();
+            refreshDate();
+        }
+
+    }
+    @FXML
+    public void buttonContinuar(){
+        
+        esperaContinuar(LINHAEMEXECUSSAO);
+        refreshSelection();
+        timer.play();
+        butonNext.setDisable(true);
+        butonPlay.setDisable(true);
+        butonContinuar.setDisable(true);
+    }
+    Timeline timer2;
+        public void esperaContinuar(int index) {
+        lvCodigo.getSelectionModel().select(index);
+        timer2 = new Timeline(new KeyFrame(javafx.util.Duration.seconds(1), (e) -> {
+
+            if (breakPoints.contains(index+1)) {
+                refreshSelection();
+                butonNext.setDisable(false);
+                butonContinuar.setDisable(false);
+                LINHAEMEXECUSSAO = index;
+                refreshDate();
+               
+                //selectLinha(ArrayLinha.get(index));
+
+            } else if (ArrayLinha.size() - 1 != index) {
+                refreshSelection();
+                LINHAEMEXECUSSAO = index;
+                System.out.println(LINHAEMEXECUSSAO);
+                
+                lvCodigo.getSelectionModel().selectNext();
+                lvCodigo.getSelectionModel().clearSelection(index);
+                espera(lvCodigo.getSelectionModel().getSelectedIndex());
+                refreshSelection();
+                refreshDate();
+           
+            }else if(ArrayLinha.size() - 1 == index){
+                refreshSelection();
+               buttonStop.setDisable(true);
+               System.out.println("PARADA");
+                buttonStop();
+                timer2.stop();
+                
+                butonContinuar.setDisable(true);
+            }
+
+        }));
+        timer2.play();
+    }
+    @FXML
+    public void buttonStop() {
+        timer.stop();
+        LINHAEMEXECUSSAO = 0;
+        lvCodigo.getSelectionModel().clearSelection();
+        butonPlay.setDisable(false);
+        lvCodigo.setDisable(false);
+        TextAreaCodigo.setEditable(true);
+        butonNext.setDisable(true);
+        refreshDate();
+        refreshArrayLine();
+        refreshSelection();
     }
 
     public void selectLinha(String LiString) {
 
-        String linhaRecebida = "casa doida de coqueiro";
+        String linhaRecebida = LiString;
         String texto;
         texto = TextAreaCodigo.getText();
 
@@ -254,7 +410,7 @@ public class FXML_InterfacePrincipalController implements Initializable {
     @FXML
     private void selectBreakPoints(MouseEvent event) {
         lvCodigo.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-
+        breakPoints.sorted();
         if (event.getClickCount() == 1) {
             if (breakPoints.contains(lvCodigo.getSelectionModel().getSelectedIndex())) {
                 breakPoints.remove(lvCodigo.getSelectionModel().getSelectedItem());
@@ -274,25 +430,7 @@ public class FXML_InterfacePrincipalController implements Initializable {
             refreshSelection();
             console.setText(breakPoints.toString());
 
-//            lvCodigo.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Integer>() {
-//
-//                public void changed(ObservableValue<? extends Integer> obs, Integer ov, Integer nv) {                
-//                    // selected.setItems(lvCodigo.getSelectionModel().getSelectedItems());
-//                    lvCodigo.getSelectionModel().selectIndices(ov, nv);
-//                    
-//                }
-//            });
         }
     }
 
-    @FXML
-    private void selectLinha(ActionEvent event) {
-        String linhaRecebida = "casa doida de coqueiro";
-        String texto;
-        texto = TextAreaCodigo.getText();
-
-        TextAreaCodigo.setStyle("-fx-highlight-fill: lightgray; -fx-highlight-text-fill: firebrick; ");
-        TextAreaCodigo.selectRange(texto.indexOf(linhaRecebida), texto.indexOf(linhaRecebida) + linhaRecebida.length());
-  
-    }
 }
