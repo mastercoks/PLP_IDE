@@ -14,10 +14,10 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 
-			Parent root = FXMLLoader.load(getClass().getResource(File.separator + "FXML_InterfacePrincipal.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("FXML_InterfacePrincipal.fxml"));
 			Scene scene = new Scene(root);
 			primaryStage.setTitle("PLP IDE");
-			primaryStage.getIcons().add(new Image(File.separator + "icons" + File.separator + "logo.png"));
+			primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/icons/logo.png")));
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch (Exception e) {
