@@ -1,61 +1,42 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.Optional;
-import java.util.Scanner;
 
-import javafx.scene.control.TextInputDialog;
+import javax.swing.JOptionPane;
 
 public class Codigo {
-	private ArrayList<String> linhas;
 	private String linha;
 	private Dados dados;
+	private String resultado;
+	private Integer jump;
 
 	public Codigo() {
 		dados = new Dados();
-		linhas = new ArrayList<>();
+		resultado = "";
 	}
 
-	public void insereLinha(String linha) {
-		linhas.add(linha);
+	public Dados getDados() {
+		return dados;
 	}
 
-	public ArrayList<Integer> getDados() {
+	public Integer getJump() {
+		Integer jump = this.jump;
+		this.jump = null;
+		return jump;
+	}
+
+	public String getResultado() {
+		return resultado;
+	}
+
+	public ArrayList<Integer> getArrayDados() {
 		return dados.getDados();
 	}
 
-	// public String interpretaLinha(int index) {
-	// String linhaTemp = linhas.get(index);
-	// char[] caracteres = linhaTemp.toCharArray();
-	// String argumento = "";
-	// for (char caracter : caracteres) {
-	// Character.getType(caracter);
-	// if (caracter != 32) {
-	// argumento += caracter;
-	// } else if (argumento != "") {
-	// switch (argumento) {
-	// case "set":
-	// System.out.println("Instrução set");
-	// break;
-	// case "jump":
-	//
-	// System.out.println("Instrução jump");
-	// break;
-	// case "jumpt":
-	// System.out.println("Instrução jumpt");
-	// break;
-	// default:
-	// System.out.println("Instrução desconhecida: " + argumento);
-	// return null;
-	// }
-	// }
-	// }
-	// return argumento;
-	// }
-
 	private boolean lookupString(String lexeme) {
 		return lexeme.equalsIgnoreCase("set") || lexeme.equalsIgnoreCase("jump") || lexeme.equalsIgnoreCase("jumpt")
-				|| lexeme.equalsIgnoreCase("write") || lexeme.equalsIgnoreCase("read") || lexeme.equalsIgnoreCase("d");
+				|| lexeme.equalsIgnoreCase("write") || lexeme.equalsIgnoreCase("read") || lexeme.equalsIgnoreCase("d")
+				|| lexeme.equalsIgnoreCase("halt");
 	}
 
 	private boolean lookupChar(char nextChar) {
@@ -93,55 +74,72 @@ public class Codigo {
 		return lexeme;
 	}
 
-	public boolean analiseSintatica(int index) {
-		// this.linha = linha;
-		linha = linhas.get(index);
+	public boolean executarLinha(String l) {
+
+		if (l.equals("")){
+			return true;
+		}
+		linha = l;
 		switch (analiseLexica()) {
+		case "halt":
+			resultado = "Codigo finalizado!\n";
+			return true;
 		case "set":
 			String target = analiseLexica();
 			String source;
 			if (target.equals("write") && analiseLexica().equals(",")) {
 				int num1 = analiseDado(analiseLexica());
-				source = analiseLexica();
-				while (!source.equals("fim")) {
-					int num2 = analiseDado(analiseLexica());
-					num1 = realizarOperacao(num1, num2, source);
-					source = analiseLexica();
+				if (analiseLexica().equals("fim")) {
+					// System.out.println("write: " + num1);
+					resultado = ("d[" + num1 + "] = " + dados.getDado(num1) + "\n");
+					return true;
 				}
-				
-				
 			} else {
 				try {
-					int num = Integer.parseInt(target);
+					int targetInt = Integer.parseInt(target);
 					if (analiseLexica().equals(",")) {
 						source = analiseLexica();
-						int numDado;
+						Integer num1 = null;
+						String input = "";
 						if (source.equals("read")) {
-							System.out.println("Digite um numero: ");
-							Scanner scanner = new Scanner(System.in);
-							numDado = scanner.nextInt();
+							while (num1 == null && input != null) {
+								try {
+									input = JOptionPane.showInputDialog("Digite um numero: ");
+									num1 = Integer.parseInt(input);
+								} catch (Exception e) {
+									resultado = "Erro, Entre com um numero inteiro.\n";
+								}
+							}
 
 						} else {
-							numDado = analiseDado(source);
+							num1 = dados.getDado(analiseDado(source));
+							source = analiseLexica();
+							while (!source.equals("fim")) {
+								int num2 = dados.getDado(analiseDado(analiseLexica()));
+								num1 = realizarOperacao(num1, num2, source);
+								source = analiseLexica();
+							}
 						}
-						dados.setDado(num, numDado);
+						// System.out.println("set " + targetInt + ", " + num1);
+						dados.setDado(targetInt, num1);
+						return true;
 					}
 				} catch (Exception e) {
-					// TODO: handle exception
+					break;
 				}
 			}
-			return true;
-		// break;
+			break;
 		case "jump":
 			try {
 				int num = Integer.parseInt(analiseLexica());
 				if (analiseLexica().equals("fim")) {
 					// INSERIR CODIGO AQUI
-					System.out.print(num);
+					jump = num;
+					// System.out.print(num);
 					return true;
 				}
 			} catch (Exception e) {
-				System.err.println("Erro sintatico na linha " + index);
+				break;
 			}
 
 			break;
@@ -155,27 +153,27 @@ public class Codigo {
 					if (analiseLexica().equals("fim")) {
 						// INSERIR CODIGO AQUI
 						if (checarComparacao(dados.getDado(numDado1), dados.getDado(numDado2), sinal)) {
-							System.out.println("Compara\u00E7\u00E3o = true ");
+							// System.out.println("Compara\u00E7\u00E3o = true :
+							// jump " + num);
+							jump = num;
 						} else {
-							System.out.println("Compara\u00E7\u00E3o = false ");
+							// System.out.println("Compara\u00E7\u00E3o = false
+							// ");
 						}
-						System.out.print(num + ", " + numDado1 + "(" + dados.getDado(numDado1) + ")" + sinal + numDado2
-								+ "(" + dados.getDado(numDado2) + ")");
+						// System.out.print(num + ", " + numDado1 + "(" +
+						// dados.getDado(numDado1) + ")" + sinal + numDado2
+						// + "(" + dados.getDado(numDado2) + ")");
 						return true;
 					}
 				}
 			} catch (Exception e) {
-				System.err.println("Erro sintatico na linha " + index);
+				break;
 			}
-
-			return true;
-		// break;
-		default:
-			break;
 		}
+//		System.err.println("Erro na linha " + index);
 		return false;
 	}
-	
+
 	private int realizarOperacao(int num1, int num2, String sinal) {
 		int resultado = 0;
 		switch (sinal) {
@@ -217,27 +215,12 @@ public class Codigo {
 
 	private Integer analiseDado(String d) {
 		if (d.equals("d") && analiseLexica().equals("[")) {
-			// testar se retorna quando n � numero
 			int num = Integer.parseInt(analiseLexica());
 			if (analiseLexica().equals("]")) {
 				return num;
 			}
 		}
 		return null;
-	}
-
-	public boolean analiseLexicaAux(int index) {
-		linha = linhas.get(index);
-		do {
-			String temp = analiseLexica();
-			if (temp != null) {
-				System.out.print(temp);
-			} else {
-				System.err.println("\nErro l\u00E9xico encontrado!");
-				return false;
-			}
-		} while (linha.length() != 0);
-		return true;
 	}
 
 	private String analiseLexica() {
@@ -308,51 +291,5 @@ public class Codigo {
 			break;
 		}
 		return "error";
-	}
-
-	public static void main(String[] args) {
-		Codigo cod = new Codigo();
-		// cod.insereLinha("SET 10 , D [ 10 ] ");
-		// cod.insereLinha("jump 7 ");
-		// cod.insereLinha("jump 100000 10");
-		// cod.insereLinha("jump 24 ,");
-		// cod.insereLinha("jump 10 set");
-		// cod.insereLinha("jump read");
-
-		cod.insereLinha("set 0, read");
-		cod.insereLinha("set 1, read");
-		cod.insereLinha("set 1, d[0] + d[1]");
-		cod.insereLinha("set 1, d[0] - d[1]");
-		cod.insereLinha("set 1, d[0] * d[1]");
-		cod.insereLinha("set 1, d[0] / d[1]");
-		cod.insereLinha("set 1, d[0] + d[1]+ d[2]+ d[3]+ d[4]");
-		cod.insereLinha("jumpt 8, d[0]=d[1]");
-		cod.insereLinha("jumpt 6, d[0] <= d[1]");
-		cod.insereLinha("jumpt 6, d[0] < d[1]");
-		cod.insereLinha("jumpt 6, d[0] > d[1]");
-		cod.insereLinha("jumpt 6, d[0] >= d[1]");
-		cod.insereLinha("set 0, d[0] - d[1]");
-		cod.insereLinha("jump 7");
-		cod.insereLinha("set 1, d[1] -d[0]");
-		cod.insereLinha("jump 2");
-		cod.insereLinha("set write, d[0]");
-		// cod.insereLinha("jumpt teste");
-		// cod.interpretaLinha(0);
-		System.out.println(" : " + cod.analiseSintatica(0));
-		System.out.println(" : " + cod.analiseSintatica(1));
-		System.out.println(" : " + cod.analiseSintatica(2));
-		System.out.println(" : " + cod.analiseSintatica(3));
-		System.out.println(" : " + cod.analiseSintatica(4));
-		System.out.println(" : " + cod.analiseSintatica(5));
-		System.out.println(" : " + cod.analiseSintatica(6));
-		System.out.println(" : " + cod.analiseSintatica(7));
-		System.out.println(" : " + cod.analiseSintatica(8));
-
-		// 9 = d�gito
-		// 2 = letra minuscula
-		// 1 = letra maiscula
-		// 25 = caracter especial < > =
-		// 21 = abre chaves
-		// 22 = fecha chaves
 	}
 }

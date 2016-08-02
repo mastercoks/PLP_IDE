@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="control.FXML_InterfacePrincipalController">
+  <children>
+      <ToolBar prefHeight="60.0" prefWidth="640.0">
+         <items>
+            <VBox alignment="CENTER" prefHeight="50.0" prefWidth="100.0">
+               <children>
+                  <HBox prefHeight="30.0" prefWidth="149.0" spacing="6.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#novo">
+                           <graphic>
+                              <ImageView fitHeight="18.0" fitWidth="18.0" preserveRatio="true" smooth="false">
+                                 <image>
+                                    <Image url="@../icons/novo.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <tooltip>
+                              <Tooltip text="Novo" />
+                           </tooltip>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#buscarArquivo">
+                           <graphic>
+                              <ImageView fitHeight="18.0" fitWidth="18.0" preserveRatio="true" smooth="false">
+                                 <image>
+                                    <Image url="@../icons/carregar.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <tooltip>
+                              <Tooltip text="Abrir" />
+                           </tooltip>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#salvarArquivo">
+                           <graphic>
+                              <ImageView fitHeight="18.0" fitWidth="18.0" preserveRatio="true" smooth="false">
+                                 <image>
+                                    <Image url="@../icons/salvar.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <tooltip>
+                              <Tooltip text="Salvar" />
+                           </tooltip>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <HBox alignment="TOP_CENTER" prefHeight="20.0" prefWidth="120.0">
+                     <children>
+                        <Label text="Arquivo" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <Separator orientation="VERTICAL" prefHeight="50.0" prefWidth="0.0" />
+            <VBox alignment="CENTER" prefHeight="50.0" prefWidth="186.0">
+               <children>
+                  <HBox prefHeight="30.0" prefWidth="196.0" spacing="6.0">
+                     <children>
+                        <Button fx:id="buttonPlay" mnemonicParsing="false" onAction="#play">
+                           <graphic>
+                              <ImageView fitHeight="18.0" fitWidth="18.0" preserveRatio="true" smooth="false">
+                                 <image>
+                                    <Image url="@../icons/comecar.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <tooltip>
+                              <Tooltip text="Comecar" />
+                           </tooltip>
+                        </Button>
+                        <Button fx:id="buttonStop" mnemonicParsing="false" onAction="#buttonStop">
+                           <graphic>
+                              <ImageView fitHeight="18.0" fitWidth="18.0" preserveRatio="true" smooth="false">
+                                 <image>
+                                    <Image url="@../icons/parar.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <tooltip>
+                              <Tooltip text="Parar" />
+                           </tooltip>
+                        </Button>
+                        <Button fx:id="buttonNext" mnemonicParsing="false" onAction="#buttonNext">
+                           <graphic>
+                              <ImageView fitHeight="18.0" fitWidth="18.0" preserveRatio="true" smooth="false">
+                                 <image>
+                                    <Image url="@../icons/passar.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <tooltip>
+                              <Tooltip text="Proximo" />
+                           </tooltip>
+                        </Button>
+                        <Button fx:id="buttonContinuar" mnemonicParsing="false" onAction="#buttonContinuar">
+                           <graphic>
+                              <ImageView fitHeight="18.0" fitWidth="18.0" preserveRatio="true" smooth="false">
+                                 <image>
+                                    <Image url="@../icons/continuar.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <tooltip>
+                              <Tooltip text="Continuar" />
+                           </tooltip>
+                        </Button>
+                        <Separator orientation="VERTICAL" prefHeight="200.0" />
+                        <Button mnemonicParsing="false" onAction="#buttonLimparConsole">
+                           <graphic>
+                              <ImageView fitHeight="18.0" fitWidth="18.0" preserveRatio="true" smooth="false">
+                                 <image>
+                                    <Image url="@../icons/limpar.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <tooltip>
+                              <Tooltip text="Limpar Console" />
+                           </tooltip>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <HBox alignment="TOP_CENTER" prefHeight="20.0" prefWidth="240.0">
+                     <children>
+                        <Label alignment="TOP_CENTER" text="Controle" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <Separator orientation="VERTICAL" prefHeight="50.0" prefWidth="0.0" />
+         </items>
+      </ToolBar>
+      <SplitPane dividerPositions="0.7" orientation="VERTICAL" VBox.vgrow="ALWAYS">
+        <items>
+            <SplitPane dividerPositions="0.8">
+               <items>
+                  <TabPane fx:id="tablePane" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="ALL_TABS">
+                    <tabs>
+                      <Tab fx:id="tabMain" closable="false" text="Codigo">
+                           <content>
+                              <ScrollPane fx:id="scrollPane" fitToWidth="true" hbarPolicy="NEVER" prefViewportHeight="205.0" prefViewportWidth="507.0" vbarPolicy="ALWAYS">
+                                 <content>
+                                    <BorderPane>
+                                       <left>
+                                          <ListView fx:id="lvCodigo" onMouseClicked="#selectBreakPoints" prefHeight="196.0" prefWidth="30.0" stylesheets="@../css/stylesheets.css" BorderPane.alignment="CENTER" />
+                                       </left>
+                                       <center>
+                                          <TextArea fx:id="TextAreaCodigo" onKeyTyped="#sincroniaScrool" onScroll="#sincroniaScrool" prefWidth="463.0" stylesheets="@../css/stylesheets.css" wrapText="true" BorderPane.alignment="CENTER">
+                                             <font>
+                                                <Font size="13.0" />
+                                             </font>
+                                          </TextArea>
+                                       </center>
+                                    </BorderPane>
+                                 </content>
+                              </ScrollPane>
+                           </content>
+                      </Tab>
+                    </tabs>
+                  </TabPane>
+                  <TableView fx:id="tabelaDados" editable="true" prefHeight="220.0" prefWidth="40.0" SplitPane.resizableWithParent="false">
+                    <columns>
+                        <TableColumn fx:id="id" editable="false" prefWidth="34.0" text="ID" />
+                      <TableColumn fx:id="dados" editable="false" maxWidth="1000.0" prefWidth="91.0" sortable="false" text="Dados" />
+                    </columns>
+                     <columnResizePolicy>
+                        
+                     </columnResizePolicy>
+                  </TableView>
+               </items>
+            </SplitPane>
+            <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" SplitPane.resizableWithParent="false">
+              <tabs>
+                <Tab text="Console">
+                     <content>
+                        <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0">
+                           <content>
+                              <TextArea fx:id="console" prefHeight="62.0" prefWidth="638.0" />
+                           </content>
+                        </ScrollPane>
+                     </content>
+                </Tab>
+              </tabs>
+            </TabPane>
+        </items>
+      </SplitPane>
+  </children>
+</VBox>
