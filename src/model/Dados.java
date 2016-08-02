@@ -15,11 +15,11 @@ public class Dados {
 	public void setDado(int index, int dado) {
 		dados.set(index, dado);
 	}
-	
+
 	public Integer getDado(int index) {
 		return dados.get(index);
 	}
-	
+
 	public ArrayList<Integer> getDados() {
 		return dados;
 	}
